@@ -35,10 +35,12 @@ export default function PageClient({ initialTimeLeft }:any) {
     return () => clearInterval(timer);
   }, []);
 
-  const latitude = 9.869304758262079;
-  const longitude = -83.84490027910383;
+ 
 
   const openLocation = () => {
+
+     const latitude = 9.869266092187164;
+  const longitude = -83.9038852748721;
     const ua = navigator.userAgent.toLowerCase();
     const isAndroid = ua.includes("android");
     const isIOS = /iphone|ipad|ipod/.test(ua);
