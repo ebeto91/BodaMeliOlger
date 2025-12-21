@@ -6,21 +6,22 @@ import { Italianno, Montserrat } from 'next/font/google';
 import { useState, useLayoutEffect } from 'react';
 import Appgallery from '../testGallery/page';
 import bodaImage from '../../../public/assets/images/pp1.webp';
-import ProfileCard from '@/components/ProfileCard';
 import WeddingFallingSnowSakura from '../petalos/page';
 import { div } from 'framer-motion/client';
 
 const roboto = Italianno({ subsets: ['latin'], weight: ['400'], style: ['normal'] });
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400'], style: ['normal'] });
 
-export default function PageClient({ initialTimeLeft }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function PageClient({ initialTimeLeft }:any) {
   // Inicializamos el estado con los valores del servidor
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
   // Contador que se actualiza cada segundo, useLayoutEffect reduce parpadeo
   useLayoutEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setTimeLeft((prev:any) => {
         let { days, hours, minutes, seconds } = prev;
         seconds -= 1;
         if (seconds < 0) { seconds = 59; minutes -= 1; }

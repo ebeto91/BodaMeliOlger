@@ -5,8 +5,10 @@ import './CircularGallery.css';
 
 type GL = Renderer['gl'];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function debounce<T extends (...args: any[]) => void>(func: T, wait: number) {
   let timeout: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (this: any, ...args: Parameters<T>) {
     window.clearTimeout(timeout);
     timeout = window.setTimeout(() => func.apply(this, args), wait);
@@ -17,6 +19,7 @@ function lerp(p1: number, p2: number, t: number): number {
   return p1 + (p2 - p1) * t;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function autoBind(instance: any): void {
   const proto = Object.getPrototypeOf(instance);
   Object.getOwnPropertyNames(proto).forEach(key => {
@@ -406,6 +409,7 @@ class App {
     last: number;
     position?: number;
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onCheckDebounce: (...args: any[]) => void;
   renderer!: Renderer;
   gl!: GL;
@@ -579,6 +583,7 @@ class App {
 
   onWheel(e: Event) {
     const wheelEvent = e as WheelEvent;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const delta = wheelEvent.deltaY || (wheelEvent as any).wheelDelta || (wheelEvent as any).detail;
     this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
     this.onCheckDebounce();
