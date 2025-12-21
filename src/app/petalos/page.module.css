@@ -1,0 +1,58 @@
+
+.container{
+  display: grid;
+  grid-template-columns:  320px;
+  gap: 30px;
+margin-left: auto;
+margin-right: auto;
+width: 90%; 
+}
+
+
+
+.card__article{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.card__img{
+  width: 320px;
+  border-radius: 1.5rem;
+
+}
+
+.card__data{
+  width: 300px;
+  background-color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 24px hsla(0,0%, 0%, .15);
+  border-radius: 1rem;
+  position: absolute;
+  bottom: -5rem;
+  margin: auto;
+  opacity: .9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+
+.pCeremoniaRecepcion{
+  text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    position: relative;
+   
+}
+
+.iconsCustom{
+  height: 50px !important;
+  width: 50px !important;
+  position: relative !important;
+  filter: grayscale(50%);
+  display: flex;
+}
