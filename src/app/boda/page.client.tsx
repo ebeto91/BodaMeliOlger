@@ -35,17 +35,12 @@ export default function PageClient() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
 
   useEffect(() => {
-  const tick = () => setTimeLeft(getTimeLeft());
+    const timer = setInterval(() => {
+      setTimeLeft(getTimeLeft());
+    }, 1000);
 
-  tick(); // inmediato
-
-  const timeout = setTimeout(() => {
-    tick();
-    setInterval(tick, 1000);
-  }, 1000 - (Date.now() % 1000));
-
-  return () => clearTimeout(timeout);
-}, []);
+    return () => clearInterval(timer);
+  }, []);
  
 
  
