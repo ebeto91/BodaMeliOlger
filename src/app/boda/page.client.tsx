@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import { Italianno, Montserrat } from 'next/font/google';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import Appgallery from '../testGallery/page';
 import bodaImage from '../../../public/assets/images/pp1.webp';
 import WeddingFallingSnowSakura from '../petalos/page';
@@ -12,28 +12,36 @@ import { div } from 'framer-motion/client';
 const roboto = Italianno({ subsets: ['latin'], weight: ['400'], style: ['normal'] });
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400'], style: ['normal'] });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function PageClient({ initialTimeLeft }:any) {
-  // Inicializamos el estado con los valores del servidor
-  const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
+const TARGET_DATE = new Date("2026-01-17T13:30:00").getTime();
 
-  // Contador que se actualiza cada segundo, useLayoutEffect reduce parpadeo
-  useLayoutEffect(() => {
+function getTimeLeft() {
+  const now = Date.now();
+  const distance = TARGET_DATE - now;
+
+  if (distance <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  return {
+    days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((distance / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((distance / (1000 * 60)) % 60),
+    seconds: Math.floor((distance / 1000) % 60),
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function PageClient() {
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+
+  useEffect(() => {
     const timer = setInterval(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setTimeLeft((prev:any) => {
-        let { days, hours, minutes, seconds } = prev;
-        seconds -= 1;
-        if (seconds < 0) { seconds = 59; minutes -= 1; }
-        if (minutes < 0) { minutes = 59; hours -= 1; }
-        if (hours < 0) { hours = 23; days -= 1; }
-        if (days < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        return { days, hours, minutes, seconds };
-      });
+      setTimeLeft(getTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
+ 
 
  
 
